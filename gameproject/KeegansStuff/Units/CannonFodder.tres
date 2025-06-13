@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UnitBase" load_steps=2 format=3 uid="uid://bc8p7acbt40w0"]
+
+[ext_resource type="Script" uid="uid://v6h0xc5bep6d" path="res://KeegansStuff/Units/UnitResource/UnitBase.gd" id="1_utfei"]
+
+[resource]
+script = ExtResource("1_utfei")
+attack_strength = 3
+attack_speed = 1
+attack_distance = 2.0
+movement_speed = 1.0
+health = 5.0
+defence = 1.0
+notoriety = 1
+metadata/_custom_type_script = "uid://v6h0xc5bep6d"
