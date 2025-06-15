@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjwapetwr217i"]
+
+[ext_resource type="Script" uid="uid://67riuuo8q7cb" path="res://DamageLabel.gd" id="1_w3djj"]
+
+[node name="DamageLabel" type="Label"]
+texture_filter = 3
+offset_right = 40.0
+offset_bottom = 23.0
+pivot_offset = Vector2(6.585, 8.42)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 12
+text = "12"
+script = ExtResource("1_w3djj")

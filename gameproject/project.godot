@@ -14,9 +14,19 @@ config/name="GameProject"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+UnitListGlobal="*res://KeegansStuff/Rts/UnitListGlobal.gd"
+
 [display]
 
 window/size/viewport_width=160
 window/size/viewport_height=192
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+
+[layer_names]
+
+2d_physics/layer_1="UnitAttackZone"
+2d_physics/layer_2="UnitBodies"
+2d_physics/layer_3="Enviorment"

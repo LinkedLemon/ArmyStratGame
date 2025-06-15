@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://2qm66mr1efrd"]
+
+[ext_resource type="Script" uid="uid://c6gc3xi78m0rj" path="res://KeegansStuff/Rts/UnitSpawnPoint/unit_spawn_point.gd" id="1_4b1ah"]
+
+[node name="UnitSpawnPoint" type="Marker2D"]
+script = ExtResource("1_4b1ah")
