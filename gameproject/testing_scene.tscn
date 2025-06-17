@@ -1,6 +1,6 @@
 [gd_scene load_steps=42 format=3 uid="uid://dl566k08hqobt"]
 
-[ext_resource type="Script" uid="uid://b5aiwur0ur4ix" path="res://testing_scene.gd" id="1_7tmfp"]
+[ext_resource type="Script" path="res://testing_scene.gd" id="1_7tmfp"]
 [ext_resource type="PackedScene" uid="uid://2qm66mr1efrd" path="res://KeegansStuff/Rts/UnitSpawnPoint/unit_spawn_point.tscn" id="2_7tmfp"]
 [ext_resource type="Texture2D" uid="uid://b5qt3ewmcmxbl" path="res://Assets/Art/Enviorment/Backround.webp" id="2_map4d"]
 [ext_resource type="Script" uid="uid://pwar0matm8h1" path="res://KeegansStuff/Stratagem/stat_manager.gd" id="3_map4d"]
