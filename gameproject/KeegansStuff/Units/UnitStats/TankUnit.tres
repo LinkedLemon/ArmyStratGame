@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UnitBase" load_steps=3 format=3 uid="uid://bjhhvp7ae3i4p"]
+
+[ext_resource type="AnimationLibrary" uid="uid://dvskfpqm0s16i" path="res://KeegansStuff/Units/UnitAnimationLibary/TankUnitLib.res" id="1_c2p6k"]
+[ext_resource type="Script" uid="uid://v6h0xc5bep6d" path="res://KeegansStuff/Units/UnitResource/UnitBase.gd" id="1_ovq20"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_ovq20")
+attack_strength = 12
+attack_speed = 1.1
+attack_distance = 0.0
+movement_speed = 150.0
+max_movement_speed = 10.0
+health = 24.0
+defence = 1.0
+notoriety = 0
+animation_library = ExtResource("1_c2p6k")
+metadata/_custom_type_script = "uid://v6h0xc5bep6d"

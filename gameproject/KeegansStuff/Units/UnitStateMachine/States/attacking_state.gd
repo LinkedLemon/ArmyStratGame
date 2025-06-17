@@ -14,8 +14,7 @@ func enter() -> void:
 		unit = actor
 	
 	cooldown.wait_time = unit.unit_stats.attack_speed
-	
-	cooldown.start()
+	start_timer()
 
 func attack():
 	if !can_attack:
@@ -28,8 +27,6 @@ func attack():
 		return
 	
 	unit.clean_attack_zone_units()
-	
-	unit.play_animation(Unit.AnimStates.Attack)
 	
 	for target_unit in unit.attack_zone_units:
 		if target_unit.is_dead:
@@ -55,7 +52,7 @@ func attack():
 				var knockback_power = unit.unit_stats.attack_strength * 12
 				target_unit.apply_central_impulse(knockback_direction * (knockback_power - (target_unit.unit_stats.defence * randf_range(1.25,2.00))))
 	
-	cooldown.start()
+	start_timer()
 	can_attack = false
 	
 	unit.clean_attack_zone_units()
@@ -75,3 +72,7 @@ func calculate_damage(attacker, target) -> int:
 	# Apply minimum damage guarantee and randomness
 	var final_damage: int = max(1, ceil(raw_damage * randf_range(0.95, 1.05)))
 	return final_damage
+
+func start_timer():
+	unit.play_animation(Unit.AnimStates.Attack)
+	cooldown.start()

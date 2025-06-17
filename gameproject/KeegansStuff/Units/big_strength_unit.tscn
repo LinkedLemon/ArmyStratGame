@@ -12,7 +12,7 @@ size = Vector2(30, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hwd1"]
 size = Vector2(15, 18)
 
-[node name="BigStrengthUnit" node_paths=PackedStringArray("attack_zone") instance=ExtResource("1_4stvi")]
+[node name="BigStrengthUnit" node_paths=PackedStringArray("attack_zone") groups=["Unit"] instance=ExtResource("1_4stvi")]
 physics_material_override = SubResource("PhysicsMaterial_2drv4")
 unit_stats = ExtResource("2_2drv4")
 attack_zone = NodePath("Pivot/Area2D")

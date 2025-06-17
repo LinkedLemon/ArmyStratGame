@@ -144,3 +144,4 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_t2qli")
 step = 0.1
 value = 50.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true

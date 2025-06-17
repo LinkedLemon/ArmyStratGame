@@ -9,7 +9,7 @@ size = Vector2(15, 18)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ngk2m"]
 size = Vector2(14, 31)
 
-[node name="UnitBaseScene" node_paths=PackedStringArray("attack_zone") instance=ExtResource("1_4diib")]
+[node name="UnitBaseScene" node_paths=PackedStringArray("attack_zone") groups=["Unit"] instance=ExtResource("1_4diib")]
 unit_stats = ExtResource("2_ya1d0")
 attack_zone = NodePath("Pivot/Area2D")
 

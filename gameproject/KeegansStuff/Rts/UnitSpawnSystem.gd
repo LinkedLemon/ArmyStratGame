@@ -31,6 +31,14 @@ func spawn_better():
 	if success:
 		spawn.spawn_unit(UnitListGlobal.UnitNames.BetterBasic)
 
+func spawn_tank():
+	strat_manager.start_sequence(generate_direction_array(14))
+	
+	var success = await strat_manager.StratFinished
+	
+	if success:
+		spawn.spawn_unit(UnitListGlobal.UnitNames.TankUnit)
+
 func generate_direction_array(length: int) -> Array:
 	var directions = ["up", "down", "left", "right"]
 	var result = []

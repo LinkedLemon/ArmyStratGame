@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dl566k08hqobt"]
+[gd_scene load_steps=42 format=3 uid="uid://dl566k08hqobt"]
 
 [ext_resource type="Script" uid="uid://b5aiwur0ur4ix" path="res://testing_scene.gd" id="1_7tmfp"]
 [ext_resource type="PackedScene" uid="uid://2qm66mr1efrd" path="res://KeegansStuff/Rts/UnitSpawnPoint/unit_spawn_point.tscn" id="2_7tmfp"]
@@ -22,12 +22,14 @@
 [ext_resource type="PackedScene" uid="uid://yvfnjvn282x4" path="res://KeegansStuff/Units/spawn_unit.tscn" id="16_mr3de"]
 [ext_resource type="Resource" uid="uid://bp2ftdmels2qh" path="res://KeegansStuff/Units/UnitStats/PlayerCar.tres" id="17_k0tke"]
 [ext_resource type="Resource" uid="uid://cuht2trwvnp0u" path="res://KeegansStuff/Units/UnitStats/EnemyCar.tres" id="18_0rokt"]
+[ext_resource type="Script" uid="uid://dnbf2uwybysf2" path="res://KeegansStuff/Units/nuke.gd" id="23_m5rpr"]
+[ext_resource type="Texture2D" uid="uid://ckc0nxp40otlf" path="res://Assets/Art/Units/Nuke/Exsplosion.webp" id="24_3xy45"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tmfp"]
-size = Vector2(160, 20)
+size = Vector2(310, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j6xku"]
-size = Vector2(160, 75)
+size = Vector2(256, 75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_map4d"]
 size = Vector2(47.5, 124)
@@ -136,6 +138,178 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 anti_aliasing = false
 
+[sub_resource type="Animation" id="Animation_ocjhm"]
+resource_name = "Drop_bomb"
+length = 1.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bomb:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(80, -66), Vector2(80, 88)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bomb:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explosin:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.45, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Explosin:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.45, 0.7, 0.9, 1.3, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1, 0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.91, 0.29848, 0.1456, 0), Color(0.91, 0.29848, 0.1456, 0), Color(0.91, 0.29848, 0.1456, 0.780392), Color(0.91, 0.29848, 0.1456, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Explosin:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.3, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"kill_all"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_pvu3v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bomb:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(80, 88)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bomb:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explosin:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Explosin:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.91, 0.29848, 0.1456, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Explosin:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gdpg5"]
+_data = {
+&"Drop_bomb": SubResource("Animation_ocjhm"),
+&"RESET": SubResource("Animation_pvu3v")
+}
+
 [node name="TestingScene" type="Node2D" node_paths=PackedStringArray("game_state_machine", "strat_manager", "player_spawn", "enemy_spawn") groups=["GameRoot"]]
 script = ExtResource("1_7tmfp")
 game_state_machine = NodePath("StateMachine")
@@ -154,7 +328,6 @@ autostart = true
 [node name="Collisions" type="Node" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Collisions"]
-visible = false
 position = Vector2(80, 0)
 collision_layer = 4
 collision_mask = 0
@@ -176,11 +349,9 @@ shape = SubResource("RectangleShape2D_j6xku")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Collisions"]
-visible = false
-position = Vector2(-10, 69)
+position = Vector2(-31, 69)
 collision_layer = 4
 collision_mask = 0
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
 position = Vector2(-13.75, 0)
@@ -188,11 +359,9 @@ shape = SubResource("RectangleShape2D_map4d")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Collisions"]
-visible = false
-position = Vector2(198, 69)
+position = Vector2(218, 69)
 collision_layer = 4
 collision_mask = 0
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
 position = Vector2(-13.75, 0)
@@ -211,7 +380,7 @@ position = Vector2(3, 89)
 unit_stats = ExtResource("17_k0tke")
 
 [node name="EnemyCar" parent="." instance=ExtResource("16_mr3de")]
-position = Vector2(158, 89)
+position = Vector2(167, 89)
 unit_stats = ExtResource("18_0rokt")
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -281,7 +450,7 @@ texture_focused = ExtResource("9_kedo2")
 texture_click_mask = ExtResource("9_7gby3")
 stretch_mode = 3
 script = ExtResource("8_lucyw")
-cooldown_time = 1.25
+cooldown_time = 2.0
 
 [node name="ColorRect" type="ColorRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer/CannonFodder"]
 z_index = -1
@@ -337,7 +506,7 @@ texture_focused = ExtResource("9_kedo2")
 texture_click_mask = ExtResource("9_7gby3")
 stretch_mode = 3
 script = ExtResource("8_lucyw")
-cooldown_time = 2.5
+cooldown_time = 4.0
 
 [node name="ColorRect" type="ColorRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer/Normal"]
 z_index = -1
@@ -393,7 +562,7 @@ texture_focused = ExtResource("9_kedo2")
 texture_click_mask = ExtResource("9_7gby3")
 stretch_mode = 3
 script = ExtResource("8_lucyw")
-cooldown_time = 4.0
+cooldown_time = 12.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer/Big"]
 show_behind_parent = true
@@ -449,7 +618,7 @@ texture_focused = ExtResource("9_kedo2")
 texture_click_mask = ExtResource("9_7gby3")
 stretch_mode = 3
 script = ExtResource("8_lucyw")
-cooldown_time = 7.0
+cooldown_time = 30.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer/Bigger"]
 show_behind_parent = true
@@ -509,7 +678,7 @@ texture_focused = ExtResource("9_kedo2")
 texture_click_mask = ExtResource("9_7gby3")
 stretch_mode = 3
 script = ExtResource("8_lucyw")
-cooldown_time = 30.0
+cooldown_time = 120.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer2/Nuke"]
 show_behind_parent = true
@@ -731,8 +900,40 @@ unit_ui = NodePath("../../UI/UnitUi")
 game_root = NodePath("../..")
 metadata/_custom_type_script = "uid://pp76qm2tpx4y"
 
+[node name="Nuke" type="Node2D" parent="."]
+script = ExtResource("23_m5rpr")
+
+[node name="Bomb" type="Sprite2D" parent="Nuke"]
+visible = false
+texture_filter = 1
+position = Vector2(80, 88)
+rotation = 1.57079
+texture = ExtResource("14_3xy45")
+
+[node name="Explosin" type="Sprite2D" parent="Nuke"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+position = Vector2(80, 45)
+scale = Vector2(3, 3)
+texture = ExtResource("24_3xy45")
+hframes = 3
+frame = 1
+
+[node name="ColorRect" type="ColorRect" parent="Nuke"]
+top_level = true
+offset_right = 160.0
+offset_bottom = 133.0
+color = Color(0.91, 0.29848, 0.1456, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Nuke"]
+libraries = {
+&"": SubResource("AnimationLibrary_gdpg5")
+}
+
 [connection signal="timeout" from="Timer" to="EnemySpawn" method="spawn_unit" binds= [0]]
 [connection signal="timeout" from="Timer2" to="EnemySpawn" method="spawn_unit" binds= [1]]
 [connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer/CannonFodder" to="spawn_manager" method="spawn_cannon"]
 [connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer/Normal" to="spawn_manager" method="spawn_normal"]
 [connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer/Big" to="spawn_manager" method="spawn_better"]
+[connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer/Bigger" to="spawn_manager" method="spawn_tank"]
+[connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer2/Nuke" to="Nuke" method="drop_bomb"]
