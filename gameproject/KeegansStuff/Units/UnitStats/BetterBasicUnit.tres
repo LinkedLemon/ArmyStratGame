@@ -7,7 +7,7 @@
 resource_local_to_scene = true
 script = ExtResource("1_sgsjm")
 attack_strength = 8
-attack_speed = 1.3
+attack_speed = 1.2
 attack_distance = 0.0
 movement_speed = 100.0
 max_movement_speed = 45.0

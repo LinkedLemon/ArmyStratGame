@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 UnitListGlobal="*res://KeegansStuff/Rts/UnitListGlobal.gd"
+GameManager="*res://KeegansStuff/Rts/GameManager.gd"
 
 [display]
 

@@ -2,6 +2,7 @@ extends TextureButton
 class_name UnitButton
 
 @export var cooldown_time : float = 1
+@onready var texture_rect = $TextureRect
 
 var new_game_root : Node2D
 
@@ -14,6 +15,8 @@ func timeout():
 	if new_game_root:
 		new_game_root.button = self as BaseButton
 	
+	texture_rect.modulate = Color.DIM_GRAY
 	disabled = true
 	await get_tree().create_timer(cooldown_time).timeout
+	texture_rect.modulate = Color.WHITE
 	disabled = false

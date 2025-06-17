@@ -45,6 +45,7 @@ func start_test_sequence():
 	start_sequence(["up", "left", "down", "right"])
 
 func start_sequence(sequence: Array):
+	$UnitPicked.play()
 	clear_arrows()
 	StratStarted.emit()
 	current_sequence = sequence
@@ -100,6 +101,7 @@ func handle_input(direction: String):
 	update_arrow_state(current_index, correct)
 	
 	if correct:
+		$ArrowPressed.play()
 		current_index += 1
 		# Check for sequence completion
 		if current_index >= current_sequence.size():

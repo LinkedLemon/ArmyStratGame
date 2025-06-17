@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://duh48asuxnppu"]
+[gd_scene load_steps=8 format=3 uid="uid://duh48asuxnppu"]
 
 [ext_resource type="PackedScene" uid="uid://dewx4ifgs355p" path="res://KeegansStuff/Units/unit_base_scene.tscn" id="1_4stvi"]
 [ext_resource type="Resource" uid="uid://c4gs78suj6xg1" path="res://KeegansStuff/Units/UnitStats/Big_Unit.tres" id="2_2drv4"]
+[ext_resource type="AudioStream" uid="uid://bq72yahhbrv5r" path="res://Assets/Sfx/SplatDeath.wav" id="3_2drv4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2drv4"]
 friction = 0.1
@@ -12,10 +13,16 @@ size = Vector2(30, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hwd1"]
 size = Vector2(15, 18)
 
-[node name="BigStrengthUnit" node_paths=PackedStringArray("attack_zone") groups=["Unit"] instance=ExtResource("1_4stvi")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xan4k"]
+random_pitch = 1.3
+streams_count = 1
+stream_0/stream = ExtResource("3_2drv4")
+
+[node name="BigStrengthUnit" node_paths=PackedStringArray("attack_zone", "die_sfx") groups=["Unit"] instance=ExtResource("1_4stvi")]
 physics_material_override = SubResource("PhysicsMaterial_2drv4")
 unit_stats = ExtResource("2_2drv4")
 attack_zone = NodePath("Pivot/Area2D")
+die_sfx = NodePath("SplatDeath")
 
 [node name="Shadow" parent="." index="1"]
 position = Vector2(0, 18)
@@ -36,3 +43,7 @@ shape = SubResource("RectangleShape2D_2hwd1")
 [node name="HealthBar" parent="." index="6"]
 offset_top = -21.0
 offset_bottom = -17.0
+
+[node name="SplatDeath" type="AudioStreamPlayer2D" parent="." index="8"]
+stream = SubResource("AudioStreamRandomizer_xan4k")
+bus = &"SFX"

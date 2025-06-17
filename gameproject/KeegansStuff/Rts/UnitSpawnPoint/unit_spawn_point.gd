@@ -8,9 +8,17 @@ enum spawnType {
 
 @export var spawn_type : spawnType
 
+@onready var player_spawn = $PlayerSpawn
+@onready var enemy_spawn = $EnemySpawn
+
 var spawned_units : Array[Unit]
 
 func spawn_unit(unit : UnitListGlobal.UnitNames):
+	
+	if spawn_type == spawnType.Player:
+		player_spawn.play()
+	else:
+		enemy_spawn.play()
 	
 	clear_nulls()
 	

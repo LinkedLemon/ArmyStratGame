@@ -5,6 +5,8 @@ class_name GameRoot
 @onready var enemy_health = $UI/GeneralUi/EnemyHealth
 @onready var cur_spawned_units = $UI/GeneralUi/CurSpawnedUnits
 @onready var player_spawnpoint = $PlayerSpawn
+@onready var unit_change_sfx = $UnitChangeSfx
+
 
 
 var button: BaseButton
@@ -17,6 +19,9 @@ var button: BaseButton
 func _ready():
 	player_spawn.unit_stats.type = UnitBase.UnitType.PLAYER
 	enemy_spawn.unit_stats.type = UnitBase.UnitType.ENEMY
+	
+	player_spawn.died.connect(game_won, false)
+	enemy_spawn.died.connect(game_won, true)
 	
 	
 	strat_manager.StratStarted.connect(change_to_strat)
@@ -59,3 +64,14 @@ func _physics_process(delta):
 	health.value = player_spawn.unit_stats.health
 	enemy_health.value = enemy_spawn.unit_stats.health
 	player_spawnpoint.clear_nulls()
+
+func game_won(did_win : bool):
+	if did_win:
+		GameManager.game_won()
+	else:
+		GameManager.game_lost()
+
+func _input(event):
+	if event.is_action_pressed("ui_focus_next") or event.is_action_pressed("ui_focus_prev"):
+		if game_state_machine.current_state is PickingState:
+			unit_change_sfx.play()

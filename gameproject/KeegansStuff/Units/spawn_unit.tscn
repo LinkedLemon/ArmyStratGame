@@ -1,15 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://yvfnjvn282x4"]
+[gd_scene load_steps=7 format=3 uid="uid://yvfnjvn282x4"]
 
 [ext_resource type="PackedScene" uid="uid://dewx4ifgs355p" path="res://KeegansStuff/Units/unit_base_scene.tscn" id="1_c1s82"]
+[ext_resource type="AudioStream" uid="uid://b4g2vpr1xtgsd" path="res://Assets/Sfx/CarHit1.wav" id="2_sjvqv"]
+[ext_resource type="AudioStream" uid="uid://c88ne1ffjaueq" path="res://Assets/Sfx/CarHit2.wav" id="3_e3vys"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3mdmi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qy0of"]
 size = Vector2(23, 53)
 
-[node name="SpawnUnit" node_paths=PackedStringArray("attack_zone") instance=ExtResource("1_c1s82")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qa08v"]
+random_pitch = 1.3
+streams_count = 2
+stream_0/stream = ExtResource("2_sjvqv")
+stream_1/stream = ExtResource("3_e3vys")
+
+[node name="SpawnUnit" node_paths=PackedStringArray("attack_zone", "die_sfx") instance=ExtResource("1_c1s82")]
 physics_material_override = SubResource("PhysicsMaterial_3mdmi")
 attack_zone = NodePath("Pivot/Area2D")
+die_sfx = NodePath("CarHit")
 
 [node name="Sprite2D" parent="." index="0"]
 z_index = -1
@@ -35,3 +44,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="6"]
 position = Vector2(-4.5, 2.5)
 shape = SubResource("RectangleShape2D_qy0of")
+
+[node name="CarHit" type="AudioStreamPlayer2D" parent="." index="8"]
+stream = SubResource("AudioStreamRandomizer_qa08v")
+bus = &"SFX"

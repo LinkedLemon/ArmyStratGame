@@ -7,7 +7,7 @@
 resource_local_to_scene = true
 script = ExtResource("2_7yed4")
 attack_strength = 2
-attack_speed = 0.7
+attack_speed = 0.6
 attack_distance = 2.0
 movement_speed = 200.0
 max_movement_speed = 20.0

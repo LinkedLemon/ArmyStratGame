@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dl566k08hqobt"]
+[gd_scene load_steps=48 format=3 uid="uid://dl566k08hqobt"]
 
 [ext_resource type="Script" uid="uid://b5aiwur0ur4ix" path="res://testing_scene.gd" id="1_7tmfp"]
 [ext_resource type="PackedScene" uid="uid://2qm66mr1efrd" path="res://KeegansStuff/Rts/UnitSpawnPoint/unit_spawn_point.tscn" id="2_7tmfp"]
@@ -6,7 +6,9 @@
 [ext_resource type="Script" uid="uid://pwar0matm8h1" path="res://KeegansStuff/Stratagem/stat_manager.gd" id="3_map4d"]
 [ext_resource type="Script" uid="uid://bj22s0mb5l526" path="res://KeegansStuff/Rts/UnitSpawnSystem.gd" id="5_y47j6"]
 [ext_resource type="Texture2D" uid="uid://dpxlbdbvqlwyd" path="res://Assets/Art/UI/UnitBox.png" id="6_00g8v"]
+[ext_resource type="AudioStream" uid="uid://cl1wx34egjes4" path="res://Assets/Sfx/PickUnit.wav" id="7_75aae"]
 [ext_resource type="Script" uid="uid://dikxs1a5pwxn0" path="res://KeegansStuff/Rts/UnitButton.gd" id="8_lucyw"]
+[ext_resource type="AudioStream" uid="uid://0ayo58qi4n6h" path="res://Assets/Sfx/ArrowPress.wav" id="8_pgrbl"]
 [ext_resource type="Texture2D" uid="uid://c3ocw565nv5wu" path="res://Assets/Art/UI/UnitBoxPressed.png" id="8_wlvp0"]
 [ext_resource type="BitMap" uid="uid://csk1y4032wmio" path="res://Assets/Art/UI/ClickMask.png" id="9_7gby3"]
 [ext_resource type="Texture2D" uid="uid://clhbwwtlw8cn7" path="res://Assets/Art/UI/UnitBoxHover.png" id="9_kedo2"]
@@ -24,6 +26,9 @@
 [ext_resource type="Resource" uid="uid://cuht2trwvnp0u" path="res://KeegansStuff/Units/UnitStats/EnemyCar.tres" id="18_0rokt"]
 [ext_resource type="Script" uid="uid://dnbf2uwybysf2" path="res://KeegansStuff/Units/nuke.gd" id="23_m5rpr"]
 [ext_resource type="Texture2D" uid="uid://ckc0nxp40otlf" path="res://Assets/Art/Units/Nuke/Exsplosion.webp" id="24_3xy45"]
+[ext_resource type="AudioStream" uid="uid://ejp8wefkv2v4" path="res://Assets/Sfx/BombFall.wav" id="25_ocjhm"]
+[ext_resource type="AudioStream" uid="uid://d2rar784btty1" path="res://Assets/Sfx/BombExpload.wav" id="26_pvu3v"]
+[ext_resource type="AudioStream" uid="uid://b425c0usyd6ax" path="res://Assets/Sfx/ChangeIcon.wav" id="27_pvu3v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tmfp"]
 size = Vector2(310, 20)
@@ -33,6 +38,12 @@ size = Vector2(256, 75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_map4d"]
 size = Vector2(47.5, 124)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_75aae"]
+random_pitch = 1.2
+random_volume_offset_db = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("8_pgrbl")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wlvp0"]
 atlas = ExtResource("9_xjsgf")
@@ -55,7 +66,7 @@ atlas = ExtResource("14_3xy45")
 region = Rect2(0, 0, 64, 32)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pitip"]
-bg_color = Color(0.281187, 0.281187, 0.281187, 0.470588)
+bg_color = Color(0.28, 0.28, 0.28, 0)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -65,13 +76,11 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
-shadow_color = Color(0, 0, 0, 0.172549)
-shadow_size = 1
 shadow_offset = Vector2(1, 1)
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lucyw"]
-bg_color = Color(0.98, 0.98, 0.4508, 1)
+bg_color = Color(0.901961, 0.815686, 0.129412, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -84,7 +93,7 @@ corner_radius_bottom_left = 2
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mr3de"]
-bg_color = Color(0.281187, 0.281187, 0.281187, 0.470588)
+bg_color = Color(0.28, 0.28, 0.28, 0)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -94,13 +103,10 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
-shadow_color = Color(0, 0, 0, 0.172549)
-shadow_size = 1
-shadow_offset = Vector2(1, 1)
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0tke"]
-bg_color = Color(0.45962, 0.98, 0.4508, 1)
+bg_color = Color(0.45098, 0.647059, 0.658824, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -228,6 +234,30 @@ tracks/6/keys = {
 "method": &"kill_all"
 }]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Falling:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Explode:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_pvu3v"]
 length = 0.001
@@ -303,6 +333,30 @@ tracks/5/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Falling:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Explode:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gdpg5"]
 _data = {
@@ -311,6 +365,7 @@ _data = {
 }
 
 [node name="TestingScene" type="Node2D" node_paths=PackedStringArray("game_state_machine", "strat_manager", "player_spawn", "enemy_spawn") groups=["GameRoot"]]
+process_mode = 3
 script = ExtResource("1_7tmfp")
 game_state_machine = NodePath("StateMachine")
 strat_manager = NodePath("UI/StatContainer")
@@ -328,27 +383,32 @@ autostart = true
 [node name="Collisions" type="Node" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Collisions"]
+visible = false
 position = Vector2(80, 0)
 collision_layer = 4
 collision_mask = 0
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
+visible = false
 shape = SubResource("RectangleShape2D_7tmfp")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Collisions"]
+visible = false
 position = Vector2(80, 183)
 collision_layer = 4
 collision_mask = 0
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/StaticBody2D2"]
+visible = false
 position = Vector2(0, -27.5)
 shape = SubResource("RectangleShape2D_j6xku")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Collisions"]
+visible = false
 position = Vector2(-31, 69)
 collision_layer = 4
 collision_mask = 0
@@ -359,6 +419,7 @@ shape = SubResource("RectangleShape2D_map4d")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Collisions"]
+visible = false
 position = Vector2(218, 69)
 collision_layer = 4
 collision_mask = 0
@@ -376,14 +437,17 @@ position = Vector2(147, 101)
 spawn_type = 1
 
 [node name="PlayerCar" parent="." instance=ExtResource("16_mr3de")]
+process_mode = 0
 position = Vector2(3, 89)
 unit_stats = ExtResource("17_k0tke")
 
 [node name="EnemyCar" parent="." instance=ExtResource("16_mr3de")]
+process_mode = 0
 position = Vector2(167, 89)
 unit_stats = ExtResource("18_0rokt")
 
 [node name="UI" type="CanvasLayer" parent="."]
+process_mode = 1
 
 [node name="StatContainer" type="Control" parent="UI" node_paths=PackedStringArray("spawn") groups=["StratManager"]]
 z_index = 1
@@ -405,6 +469,14 @@ offset_top = 70.0
 offset_right = 148.0
 offset_bottom = 122.0
 columns = 5
+
+[node name="UnitPicked" type="AudioStreamPlayer" parent="UI/StatContainer"]
+stream = ExtResource("7_75aae")
+bus = &"SFX"
+
+[node name="ArrowPressed" type="AudioStreamPlayer" parent="UI/StatContainer"]
+stream = SubResource("AudioStreamRandomizer_75aae")
+bus = &"SFX"
 
 [node name="UnitUi" type="Control" parent="UI"]
 layout_mode = 3
@@ -678,7 +750,7 @@ texture_focused = ExtResource("9_kedo2")
 texture_click_mask = ExtResource("9_7gby3")
 stretch_mode = 3
 script = ExtResource("8_lucyw")
-cooldown_time = 120.0
+cooldown_time = 90.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer2/Nuke"]
 show_behind_parent = true
@@ -780,7 +852,7 @@ offset_top = 1.0
 offset_right = 86.0
 offset_bottom = 29.0
 scale = Vector2(0.380735, 0.380735)
-theme_override_colors/font_color = Color(1, 0.28, 0.28, 1)
+theme_override_colors/font_color = Color(0.843137, 0.341176, 0.231373, 1)
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("10_6787c")
 theme_override_font_sizes/font_size = 28
@@ -809,7 +881,7 @@ offset_top = 1.0
 offset_right = 47.0
 offset_bottom = 29.0
 scale = Vector2(0.380735, 0.380735)
-theme_override_colors/font_color = Color(0.278431, 0.329412, 1, 1)
+theme_override_colors/font_color = Color(0.392157, 0.380392, 0.6, 1)
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("10_6787c")
 theme_override_font_sizes/font_size = 28
@@ -870,7 +942,7 @@ z_index = -4
 offset_top = 117.0
 offset_right = 161.0
 offset_bottom = 194.0
-color = Color(0.564962, 0.564962, 0.564962, 1)
+color = Color(0.419608, 0.254902, 0.192157, 1)
 metadata/_edit_lock_ = true
 
 [node name="GameBackground" type="TextureRect" parent="Art"]
@@ -901,6 +973,7 @@ game_root = NodePath("../..")
 metadata/_custom_type_script = "uid://pp76qm2tpx4y"
 
 [node name="Nuke" type="Node2D" parent="."]
+process_mode = 1
 script = ExtResource("23_m5rpr")
 
 [node name="Bomb" type="Sprite2D" parent="Nuke"]
@@ -930,10 +1003,22 @@ libraries = {
 &"": SubResource("AnimationLibrary_gdpg5")
 }
 
+[node name="Falling" type="AudioStreamPlayer2D" parent="Nuke"]
+stream = ExtResource("25_ocjhm")
+bus = &"SFX"
+
+[node name="Explode" type="AudioStreamPlayer2D" parent="Nuke"]
+stream = ExtResource("26_pvu3v")
+bus = &"SFX"
+
+[node name="UnitChangeSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("27_pvu3v")
+bus = &"SFX"
+
 [connection signal="timeout" from="Timer" to="EnemySpawn" method="spawn_unit" binds= [0]]
 [connection signal="timeout" from="Timer2" to="EnemySpawn" method="spawn_unit" binds= [1]]
 [connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer/CannonFodder" to="spawn_manager" method="spawn_cannon"]
 [connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer/Normal" to="spawn_manager" method="spawn_normal"]
 [connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer/Big" to="spawn_manager" method="spawn_better"]
 [connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer/Bigger" to="spawn_manager" method="spawn_tank"]
-[connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer2/Nuke" to="Nuke" method="drop_bomb"]
+[connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer2/Nuke" to="spawn_manager" method="spawn_bomb"]

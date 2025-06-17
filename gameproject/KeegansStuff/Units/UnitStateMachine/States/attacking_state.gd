@@ -5,15 +5,20 @@ extends State
 
 var unit : Unit
 var can_attack : bool = true
+var first_enter : bool = true
 
 func _ready():
 	cooldown.timeout.connect(cooldown_finished)
+	await get_tree().process_frame
 
 func enter() -> void:
 	if actor is Unit:
 		unit = actor
 	
-	cooldown.wait_time = unit.unit_stats.attack_speed
+	if first_enter:
+		cooldown.wait_time = unit.unit_stats.attack_speed
+		first_enter = false
+	
 	start_timer()
 
 func attack():
@@ -50,6 +55,9 @@ func attack():
 				
 				# Apply knockback force using RigidBody2D physics
 				var knockback_power = unit.unit_stats.attack_strength * 12
+				
+				unit.apply_central_impulse(-knockback_direction * 20)
+				
 				target_unit.apply_central_impulse(knockback_direction * (knockback_power - (target_unit.unit_stats.defence * randf_range(1.25,2.00))))
 	
 	start_timer()

@@ -1,4 +1,5 @@
 extends State
+class_name PickingState
 
 @export var unit_ui : Control
 @export var game_root : GameRoot

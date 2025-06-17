@@ -24,7 +24,7 @@ func spawn_normal():
 		spawn.spawn_unit(UnitListGlobal.UnitNames.Big1)
 
 func spawn_better():
-	strat_manager.start_sequence(generate_direction_array(8))
+	strat_manager.start_sequence(generate_direction_array(6))
 	
 	var success = await strat_manager.StratFinished
 	
@@ -32,12 +32,20 @@ func spawn_better():
 		spawn.spawn_unit(UnitListGlobal.UnitNames.BetterBasic)
 
 func spawn_tank():
-	strat_manager.start_sequence(generate_direction_array(14))
+	strat_manager.start_sequence(generate_direction_array(10))
 	
 	var success = await strat_manager.StratFinished
 	
 	if success:
 		spawn.spawn_unit(UnitListGlobal.UnitNames.TankUnit)
+
+func spawn_bomb():
+	strat_manager.start_sequence(generate_direction_array(15))
+	
+	var success = await strat_manager.StratFinished
+	
+	if success:
+		$"../Nuke".drop_bomb()
 
 func generate_direction_array(length: int) -> Array:
 	var directions = ["up", "down", "left", "right"]

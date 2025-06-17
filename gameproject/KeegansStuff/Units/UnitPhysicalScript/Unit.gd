@@ -1,6 +1,8 @@
 extends RigidBody2D
 class_name Unit
 
+signal died
+
 enum AnimStates {
 	Idle,
 	Walk,
@@ -13,8 +15,10 @@ enum AnimStates {
 @export var sprite : Sprite2D
 @export var unit_stateMachine : StateMachine
 @export var animation_player : AnimationPlayer
+@export var die_sfx : AudioStreamPlayer2D
 
 @onready var shadow = $Shadow
+@onready var hurt_sfx = $HurtSfx
 
 
 var added_animations: Array[String] = []  # Track animations we've added
@@ -50,6 +54,8 @@ func SpawnSetup(isPlayer : bool):
 		unit_stats.type = UnitBase.UnitType.ENEMY
 
 func Die():
+	died.emit()
+	die_sfx.play()
 	is_dead = true
 	unit_stateMachine.change_state("DeadState")
 	play_animation(AnimStates.Die)
@@ -57,6 +63,7 @@ func Die():
 	queue_free()
 
 func Hurt(other_body_damage : int):
+	hurt_sfx.play()
 	unit_stats.health -= other_body_damage
 	
 	if snappedf(unit_stats.health, 1) <= 0.1:
