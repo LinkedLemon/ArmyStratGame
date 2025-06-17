@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UnitBase" load_steps=3 format=3 uid="uid://cuht2trwvnp0u"]
+
+[ext_resource type="Script" uid="uid://v6h0xc5bep6d" path="res://KeegansStuff/Units/UnitResource/UnitBase.gd" id="1_jwfq7"]
+[ext_resource type="AnimationLibrary" uid="uid://bxovlo3i41374" path="res://KeegansStuff/Units/UnitAnimationLibary/EnemyCar.res" id="1_yvrbn"]
+
+[resource]
+script = ExtResource("1_jwfq7")
+attack_strength = 0
+attack_speed = 0.0
+attack_distance = 0.0
+movement_speed = 0.0
+max_movement_speed = 0.0
+health = 100.0
+defence = 5.0
+notoriety = 0
+animation_library = ExtResource("1_yvrbn")
+metadata/_custom_type_script = "uid://v6h0xc5bep6d"

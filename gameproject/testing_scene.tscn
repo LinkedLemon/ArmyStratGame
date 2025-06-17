@@ -1,7 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://dl566k08hqobt"]
+[gd_scene load_steps=37 format=3 uid="uid://dl566k08hqobt"]
 
 [ext_resource type="Script" uid="uid://b5aiwur0ur4ix" path="res://testing_scene.gd" id="1_7tmfp"]
 [ext_resource type="PackedScene" uid="uid://2qm66mr1efrd" path="res://KeegansStuff/Rts/UnitSpawnPoint/unit_spawn_point.tscn" id="2_7tmfp"]
+[ext_resource type="Texture2D" uid="uid://b5qt3ewmcmxbl" path="res://Assets/Art/Enviorment/Backround.webp" id="2_map4d"]
+[ext_resource type="Script" uid="uid://pwar0matm8h1" path="res://KeegansStuff/Stratagem/stat_manager.gd" id="3_map4d"]
+[ext_resource type="Script" uid="uid://bj22s0mb5l526" path="res://KeegansStuff/Rts/UnitSpawnSystem.gd" id="5_y47j6"]
+[ext_resource type="Texture2D" uid="uid://dpxlbdbvqlwyd" path="res://Assets/Art/UI/UnitBox.png" id="6_00g8v"]
+[ext_resource type="Script" uid="uid://dikxs1a5pwxn0" path="res://KeegansStuff/Rts/UnitButton.gd" id="8_lucyw"]
+[ext_resource type="Texture2D" uid="uid://c3ocw565nv5wu" path="res://Assets/Art/UI/UnitBoxPressed.png" id="8_wlvp0"]
+[ext_resource type="BitMap" uid="uid://csk1y4032wmio" path="res://Assets/Art/UI/ClickMask.png" id="9_7gby3"]
+[ext_resource type="Texture2D" uid="uid://clhbwwtlw8cn7" path="res://Assets/Art/UI/UnitBoxHover.png" id="9_kedo2"]
+[ext_resource type="Texture2D" uid="uid://dcehy0trl0ite" path="res://Assets/Art/Units/Cannon/CannonFodderIdle.webp" id="9_xjsgf"]
+[ext_resource type="FontFile" uid="uid://rckjh2at63i8" path="res://Assets/Fonts/Minecraft.ttf" id="10_6787c"]
+[ext_resource type="Texture2D" uid="uid://ry7kvmp858ln" path="res://Assets/Art/Units/Better/BetterFodderIdle.webp" id="10_pitip"]
+[ext_resource type="Texture2D" uid="uid://kqknxwdllodo" path="res://Assets/Art/Units/Basic/Basic_Unit_Idle.webp" id="11_2qwyn"]
+[ext_resource type="Script" uid="uid://bn6ekq7evcvi2" path="res://KeegansStuff/StateMachine/StateMachine.gd" id="12_fhslk"]
+[ext_resource type="Script" uid="uid://c3bqestmy44m3" path="res://KeegansStuff/Rts/GameplayStateMachine/States/picking_state.gd" id="13_6787c"]
+[ext_resource type="Texture2D" uid="uid://xhcsaddhne1" path="res://Assets/Art/Units/Massive/Big_Boy_Unit_Run.webp" id="13_m5rpr"]
+[ext_resource type="Texture2D" uid="uid://cpwjskfnavrxn" path="res://Assets/Art/Units/Nuke/PeaceBomb.webp" id="14_3xy45"]
+[ext_resource type="Script" uid="uid://dtn34xjiffhqt" path="res://KeegansStuff/Rts/GameplayStateMachine/States/strat_state.gd" id="14_fhslk"]
+[ext_resource type="PackedScene" uid="uid://yvfnjvn282x4" path="res://KeegansStuff/Units/spawn_unit.tscn" id="16_mr3de"]
+[ext_resource type="Resource" uid="uid://bp2ftdmels2qh" path="res://KeegansStuff/Units/UnitStats/PlayerCar.tres" id="17_k0tke"]
+[ext_resource type="Resource" uid="uid://cuht2trwvnp0u" path="res://KeegansStuff/Units/UnitStats/EnemyCar.tres" id="18_0rokt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tmfp"]
 size = Vector2(160, 20)
@@ -12,12 +32,129 @@ size = Vector2(160, 75)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_map4d"]
 size = Vector2(47.5, 124)
 
-[node name="TestingScene" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlvp0"]
+atlas = ExtResource("9_xjsgf")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ijg1"]
+atlas = ExtResource("11_2qwyn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lucyw"]
+atlas = ExtResource("10_pitip")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocjhm"]
+atlas = ExtResource("13_m5rpr")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvu3v"]
+atlas = ExtResource("14_3xy45")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pitip"]
+bg_color = Color(0.281187, 0.281187, 0.281187, 0.470588)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.172549)
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lucyw"]
+bg_color = Color(0.98, 0.98, 0.4508, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mr3de"]
+bg_color = Color(0.281187, 0.281187, 0.281187, 0.470588)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.172549)
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0tke"]
+bg_color = Color(0.45962, 0.98, 0.4508, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6787c"]
+bg_color = Color(1, 0.278431, 0.278431, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0rokt"]
+bg_color = Color(0.28, 0.328, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[node name="TestingScene" type="Node2D" node_paths=PackedStringArray("game_state_machine", "strat_manager", "player_spawn", "enemy_spawn") groups=["GameRoot"]]
 script = ExtResource("1_7tmfp")
+game_state_machine = NodePath("StateMachine")
+strat_manager = NodePath("UI/StatContainer")
+player_spawn = NodePath("PlayerCar")
+enemy_spawn = NodePath("EnemyCar")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
 
 [node name="Collisions" type="Node" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Collisions"]
+visible = false
 position = Vector2(80, 0)
 collision_layer = 4
 collision_mask = 0
@@ -39,6 +176,7 @@ shape = SubResource("RectangleShape2D_j6xku")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Collisions"]
+visible = false
 position = Vector2(-10, 69)
 collision_layer = 4
 collision_mask = 0
@@ -50,6 +188,7 @@ shape = SubResource("RectangleShape2D_map4d")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Collisions"]
+visible = false
 position = Vector2(198, 69)
 collision_layer = 4
 collision_mask = 0
@@ -60,21 +199,540 @@ position = Vector2(-13.75, 0)
 shape = SubResource("RectangleShape2D_map4d")
 metadata/_edit_lock_ = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_top = -20.0
-offset_right = 161.0
-offset_bottom = 10.0
-color = Color(0.564962, 0.564962, 0.564962, 1)
+[node name="PlayerSpawn" parent="." instance=ExtResource("2_7tmfp")]
+position = Vector2(13, 101)
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="EnemySpawn" parent="." instance=ExtResource("2_7tmfp")]
+position = Vector2(147, 101)
+spawn_type = 1
+
+[node name="PlayerCar" parent="." instance=ExtResource("16_mr3de")]
+position = Vector2(3, 89)
+unit_stats = ExtResource("17_k0tke")
+
+[node name="EnemyCar" parent="." instance=ExtResource("16_mr3de")]
+position = Vector2(158, 89)
+unit_stats = ExtResource("18_0rokt")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="StatContainer" type="Control" parent="UI" node_paths=PackedStringArray("spawn") groups=["StratManager"]]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("3_map4d")
+spawn = NodePath("GridContainer")
+
+[node name="GridContainer" type="GridContainer" parent="UI/StatContainer"]
+layout_mode = 2
+offset_left = 12.0
+offset_top = 70.0
+offset_right = 148.0
+offset_bottom = 122.0
+columns = 5
+
+[node name="UnitUi" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 138.0
+offset_right = 14.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UnitUi"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UnitUi/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CannonFodder" type="TextureButton" parent="UI/UnitUi/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_neighbor_left = NodePath("../../HBoxContainer2/Nuke")
+focus_neighbor_top = NodePath("../../HBoxContainer2/Nuke")
+focus_neighbor_right = NodePath("../Normal")
+focus_neighbor_bottom = NodePath("../../HBoxContainer2/Nuke")
+focus_next = NodePath("../Normal")
+focus_previous = NodePath("../../HBoxContainer2/Nuke")
+action_mode = 0
+texture_normal = ExtResource("6_00g8v")
+texture_pressed = ExtResource("8_wlvp0")
+texture_hover = ExtResource("9_kedo2")
+texture_disabled = ExtResource("8_wlvp0")
+texture_focused = ExtResource("9_kedo2")
+texture_click_mask = ExtResource("9_7gby3")
+stretch_mode = 3
+script = ExtResource("8_lucyw")
+cooldown_time = 1.25
+
+[node name="ColorRect" type="ColorRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer/CannonFodder"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer/CannonFodder"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_wlvp0")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="UI/UnitUi/VBoxContainer/HBoxContainer/CannonFodder"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -17.0
+offset_right = 20.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("10_6787c")
+theme_override_font_sizes/font_size = 11
+text = "Plant"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Normal" type="TextureButton" parent="UI/UnitUi/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_neighbor_left = NodePath("../CannonFodder")
+focus_neighbor_top = NodePath("../../HBoxContainer2/Nuke")
+focus_neighbor_right = NodePath("../Big")
+focus_neighbor_bottom = NodePath("../../HBoxContainer2/Nuke")
+focus_next = NodePath("../Big")
+focus_previous = NodePath("../CannonFodder")
+texture_normal = ExtResource("6_00g8v")
+texture_pressed = ExtResource("8_wlvp0")
+texture_hover = ExtResource("9_kedo2")
+texture_disabled = ExtResource("8_wlvp0")
+texture_focused = ExtResource("9_kedo2")
+texture_click_mask = ExtResource("9_7gby3")
+stretch_mode = 3
+script = ExtResource("8_lucyw")
+cooldown_time = 2.5
+
+[node name="ColorRect" type="ColorRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer/Normal"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer/Normal"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_7ijg1")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="UI/UnitUi/VBoxContainer/HBoxContainer/Normal"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -19.0
+offset_right = 20.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("10_6787c")
+theme_override_font_sizes/font_size = 13
+text = "King"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Big" type="TextureButton" parent="UI/UnitUi/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_neighbor_left = NodePath("../Normal")
+focus_neighbor_top = NodePath("../../HBoxContainer2/Nuke")
+focus_neighbor_right = NodePath("../Bigger")
+focus_neighbor_bottom = NodePath("../../HBoxContainer2/Nuke")
+focus_next = NodePath("../Bigger")
+focus_previous = NodePath("../Normal")
+texture_normal = ExtResource("6_00g8v")
+texture_pressed = ExtResource("8_wlvp0")
+texture_hover = ExtResource("9_kedo2")
+texture_disabled = ExtResource("8_wlvp0")
+texture_focused = ExtResource("9_kedo2")
+texture_click_mask = ExtResource("9_7gby3")
+stretch_mode = 3
+script = ExtResource("8_lucyw")
+cooldown_time = 4.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer/Big"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_lucyw")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="UI/UnitUi/VBoxContainer/HBoxContainer/Big"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -16.0
+offset_right = 21.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("10_6787c")
+theme_override_font_sizes/font_size = 13
+text = "Bud"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer/Big"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Bigger" type="TextureButton" parent="UI/UnitUi/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_neighbor_left = NodePath("../Big")
+focus_neighbor_top = NodePath("../../HBoxContainer2/Nuke")
+focus_neighbor_right = NodePath("../../HBoxContainer2/Nuke")
+focus_neighbor_bottom = NodePath("../../HBoxContainer2/Nuke")
+focus_next = NodePath("../../HBoxContainer2/Nuke")
+focus_previous = NodePath("../Big")
+texture_normal = ExtResource("6_00g8v")
+texture_pressed = ExtResource("8_wlvp0")
+texture_hover = ExtResource("9_kedo2")
+texture_disabled = ExtResource("8_wlvp0")
+texture_focused = ExtResource("9_kedo2")
+texture_click_mask = ExtResource("9_7gby3")
+stretch_mode = 3
+script = ExtResource("8_lucyw")
+cooldown_time = 7.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer/Bigger"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_ocjhm")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/UnitUi/VBoxContainer/HBoxContainer/Bigger"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -16.0
+offset_right = 21.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("10_6787c")
+theme_override_font_sizes/font_size = 13
+text = "BIG"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer/Bigger"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/UnitUi/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Nuke" type="TextureButton" parent="UI/UnitUi/VBoxContainer/HBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+focus_neighbor_left = NodePath("../../HBoxContainer/CannonFodder")
+focus_neighbor_top = NodePath("../../HBoxContainer/Normal")
+focus_neighbor_right = NodePath("../../HBoxContainer/Bigger")
+focus_neighbor_bottom = NodePath("../../HBoxContainer/Big")
+focus_next = NodePath("../../HBoxContainer/CannonFodder")
+focus_previous = NodePath("../../HBoxContainer/Bigger")
+texture_normal = ExtResource("6_00g8v")
+texture_pressed = ExtResource("8_wlvp0")
+texture_hover = ExtResource("9_kedo2")
+texture_disabled = ExtResource("8_wlvp0")
+texture_focused = ExtResource("9_kedo2")
+texture_click_mask = ExtResource("9_7gby3")
+stretch_mode = 3
+script = ExtResource("8_lucyw")
+cooldown_time = 30.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer2/Nuke"]
+show_behind_parent = true
+layout_mode = 0
+offset_top = 7.0
+offset_right = 32.0
+offset_bottom = 23.0
+texture = SubResource("AtlasTexture_pvu3v")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/UnitUi/VBoxContainer/HBoxContainer2/Nuke"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("10_6787c")
+theme_override_font_sizes/font_size = 12
+text = "Bom"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI/UnitUi/VBoxContainer/HBoxContainer2/Nuke"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GeneralUi" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Fame" type="ProgressBar" parent="UI/GeneralUi"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 17.0
+offset_top = 2.0
+offset_right = 77.0
+offset_bottom = 8.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_pitip")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lucyw")
+value = 49.04
+show_percentage = false
+
+[node name="Moral" type="ProgressBar" parent="UI/GeneralUi"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 17.0
+offset_top = 9.0
+offset_right = 77.0
+offset_bottom = 15.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_mr3de")
+theme_override_styles/fill = SubResource("StyleBoxFlat_k0tke")
+value = 50.0
+show_percentage = false
+
+[node name="Health" type="ProgressBar" parent="UI/GeneralUi"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -78.0
+offset_top = 25.0
+offset_right = -71.0
+offset_bottom = 71.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_pitip")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6787c")
+fill_mode = 3
+show_percentage = false
+
+[node name="Label" type="Label" parent="UI/GeneralUi/Health"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 9.0
+offset_top = 1.0
+offset_right = 86.0
+offset_bottom = 29.0
+scale = Vector2(0.380735, 0.380735)
+theme_override_colors/font_color = Color(1, 0.28, 0.28, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("10_6787c")
+theme_override_font_sizes/font_size = 28
+text = "HP"
+
+[node name="EnemyHealth" type="ProgressBar" parent="UI/GeneralUi"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 72.0
+offset_top = 25.0
+offset_right = 79.0
+offset_bottom = 71.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_pitip")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0rokt")
+fill_mode = 3
+show_percentage = false
+
+[node name="Label" type="Label" parent="UI/GeneralUi/EnemyHealth"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -30.0
+offset_top = 1.0
+offset_right = 47.0
+offset_bottom = 29.0
+scale = Vector2(0.380735, 0.380735)
+theme_override_colors/font_color = Color(0.278431, 0.329412, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("10_6787c")
+theme_override_font_sizes/font_size = 28
+text = "OP
+HP"
+horizontal_alignment = 2
+
+[node name="Text" type="Label" parent="UI/GeneralUi"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_right = 52.0
+offset_bottom = 23.0
+theme_override_constants/paragraph_spacing = -4
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("10_6787c")
+theme_override_font_sizes/font_size = 11
+text = "spawned 
+units"
+
+[node name="CurSpawnedUnits" type="Label" parent="UI/GeneralUi"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 38.0
+offset_right = 78.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("10_6787c")
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Filler" type="Label" parent="UI/GeneralUi"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 49.0
+offset_top = 8.0
+offset_right = 89.0
+offset_bottom = 31.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("10_6787c")
+theme_override_font_sizes/font_size = 10
+text = "/ 5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="spawn_manager" type="Node" parent="." node_paths=PackedStringArray("spawn", "strat_manager")]
+script = ExtResource("5_y47j6")
+spawn = NodePath("../PlayerSpawn")
+strat_manager = NodePath("../UI/StatContainer")
+metadata/_custom_type_script = "uid://bj22s0mb5l526"
+
+[node name="Art" type="Node" parent="."]
+
+[node name="UiBackground" type="ColorRect" parent="Art"]
+z_index = -4
 offset_top = 117.0
 offset_right = 161.0
 offset_bottom = 194.0
 color = Color(0.564962, 0.564962, 0.564962, 1)
+metadata/_edit_lock_ = true
 
-[node name="UnitSpawnPoint" parent="." instance=ExtResource("2_7tmfp")]
-position = Vector2(11, 83)
+[node name="GameBackground" type="TextureRect" parent="Art"]
+z_index = -4
+texture_filter = 1
+offset_left = -15.0
+offset_top = -27.0
+offset_right = 177.0
+offset_bottom = 133.0
+texture = ExtResource("2_map4d")
+metadata/_edit_lock_ = true
 
-[node name="UnitSpawnPoint2" parent="." instance=ExtResource("2_7tmfp")]
-position = Vector2(151, 81)
-spawn_type = 1
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("start_state")]
+script = ExtResource("12_fhslk")
+start_state = NodePath("PickingState")
+metadata/_custom_type_script = "uid://bn6ekq7evcvi2"
+
+[node name="PickingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit_ui", "game_root")]
+script = ExtResource("13_6787c")
+unit_ui = NodePath("../../UI/UnitUi")
+game_root = NodePath("../..")
+metadata/_custom_type_script = "uid://pp76qm2tpx4y"
+
+[node name="StratState" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit_ui", "game_root")]
+script = ExtResource("14_fhslk")
+unit_ui = NodePath("../../UI/UnitUi")
+game_root = NodePath("../..")
+metadata/_custom_type_script = "uid://pp76qm2tpx4y"
+
+[connection signal="timeout" from="Timer" to="EnemySpawn" method="spawn_unit" binds= [0]]
+[connection signal="timeout" from="Timer2" to="EnemySpawn" method="spawn_unit" binds= [1]]
+[connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer/CannonFodder" to="spawn_manager" method="spawn_cannon"]
+[connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer/Normal" to="spawn_manager" method="spawn_normal"]
+[connection signal="pressed" from="UI/UnitUi/VBoxContainer/HBoxContainer/Big" to="spawn_manager" method="spawn_better"]

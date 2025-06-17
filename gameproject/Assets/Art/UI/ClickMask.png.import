@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://csk1y4032wmio"
+path="res://.godot/imported/ClickMask.png-59be2ea6223a8f342b8a41244914f728.res"
+
+[deps]
+
+source_file="res://Assets/Art/UI/ClickMask.png"
+dest_files=["res://.godot/imported/ClickMask.png-59be2ea6223a8f342b8a41244914f728.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

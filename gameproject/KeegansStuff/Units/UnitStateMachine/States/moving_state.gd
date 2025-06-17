@@ -2,12 +2,16 @@
 class_name MoveState
 extends State
 
-#func enter() -> void:
-	## Play movement animation if available
-	#if actor.has_node("AnimationPlayer"):
-		#var anim_player = actor.get_node("AnimationPlayer")
-		#if anim_player.has_animation("move"):
-			#anim_player.play("move")
+var unit : Unit
+
+func enter() -> void:
+	if actor is Unit:
+		unit = actor
+	else:
+		return
+	
+	unit.play_animation(Unit.AnimStates.Walk)
+
 
 func physics_update(_delta: float) -> void:
 	if !actor or !actor is RigidBody2D:

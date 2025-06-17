@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://b70772wmmipei"]
+
+[ext_resource type="Texture2D" uid="uid://hd3cpbcdu8f7" path="res://Assets/Art/Arrows/InputButtons.webp" id="1_essqu"]
+[ext_resource type="Script" uid="uid://b6j1g3deyxagu" path="res://KeegansStuff/Stratagem/Arrow/arrow.gd" id="2_7byid"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxsfh"]
+atlas = ExtResource("1_essqu")
+region = Rect2(0, 0, 32, 32)
+
+[node name="Arrow" type="TextureRect"]
+texture_filter = 1
+custom_minimum_size = Vector2(24, 24)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(16, 16)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_uxsfh")
+expand_mode = 1
+script = ExtResource("2_7byid")

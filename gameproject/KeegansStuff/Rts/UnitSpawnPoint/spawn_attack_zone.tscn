@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbs5mub5gbfjk"]
+
+[ext_resource type="Script" uid="uid://db4scef2anty8" path="res://KeegansStuff/Rts/UnitSpawnPoint/spawn_attack_zone.gd" id="1_alxvl"]
+
+[node name="SpawnAttackZone" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_alxvl")

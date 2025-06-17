@@ -1,9 +1,16 @@
 class_name IdleState
 extends State
 
-#func enter() -> void:
-	#if actor.has_node("AnimationPlayer"):
-		#actor.get_node("AnimationPlayer").play("idle")
+var unit : Unit
+
+func enter() -> void:
+	print("idle entered")
+	if actor is Unit:
+		unit = actor
+	else:
+		return
+	
+	unit.play_animation(Unit.AnimStates.Idle)
 
 func physics_update(_delta: float) -> void:
 	# Transition to move state if we should move

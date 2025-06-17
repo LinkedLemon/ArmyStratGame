@@ -1,20 +1,104 @@
-[gd_scene load_steps=6 format=3 uid="uid://dewx4ifgs355p"]
+[gd_scene load_steps=13 format=3 uid="uid://dewx4ifgs355p"]
 
 [ext_resource type="Script" uid="uid://cc7akwmswr1bb" path="res://KeegansStuff/Units/UnitPhysicalScript/Unit.gd" id="1_7dpxq"]
 [ext_resource type="Script" uid="uid://bn6ekq7evcvi2" path="res://KeegansStuff/StateMachine/StateMachine.gd" id="2_1gotd"]
+[ext_resource type="Texture2D" uid="uid://d2c78yhqts54l" path="res://Assets/Art/Units/Shadow.png" id="2_yrth6"]
 [ext_resource type="Script" uid="uid://cievgy2xa4hti" path="res://KeegansStuff/Units/UnitStateMachine/States/moving_state.gd" id="3_52cqp"]
 [ext_resource type="Script" uid="uid://b20vrcs4038ne" path="res://KeegansStuff/Units/UnitStateMachine/States/idle_state.gd" id="4_1gotd"]
 [ext_resource type="Script" uid="uid://ce6t7pipk8o1y" path="res://KeegansStuff/Units/UnitStateMachine/States/attacking_state.gd" id="5_1gotd"]
+[ext_resource type="Script" uid="uid://pp76qm2tpx4y" path="res://KeegansStuff/StateMachine/BaseState.gd" id="7_t2qli"]
 
-[node name="UnitBaseScene" type="RigidBody2D"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yrth6"]
+friction = 0.1
+
+[sub_resource type="Animation" id="Animation_e5jb8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vp4ct"]
+_data = {
+&"RESET": SubResource("Animation_e5jb8")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrth6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2qli"]
+bg_color = Color(0.88, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+anti_aliasing = false
+
+[node name="UnitBaseScene" type="RigidBody2D" node_paths=PackedStringArray("sprite", "unit_stateMachine", "animation_player")]
 collision_layer = 2
 collision_mask = 5
+physics_material_override = SubResource("PhysicsMaterial_yrth6")
 script = ExtResource("1_7dpxq")
+sprite = NodePath("Sprite2D")
+unit_stateMachine = NodePath("UnitStateMachine")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+hframes = 4
 
-[node name="UnitStateMachine" type="Node" parent="."]
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.203922)
+texture_filter = 1
+texture = ExtResource("2_yrth6")
+
+[node name="UnitStateMachine" type="Node" parent="." node_paths=PackedStringArray("start_state")]
 script = ExtResource("2_1gotd")
+start_state = NodePath("MovingState")
 metadata/_custom_type_script = "uid://bn6ekq7evcvi2"
 
 [node name="MovingState" type="Node" parent="UnitStateMachine"]
@@ -28,3 +112,35 @@ metadata/_custom_type_script = "uid://pp76qm2tpx4y"
 [node name="AttackingState" type="Node" parent="UnitStateMachine"]
 script = ExtResource("5_1gotd")
 metadata/_custom_type_script = "uid://pp76qm2tpx4y"
+
+[node name="Cooldown" type="Timer" parent="UnitStateMachine/AttackingState"]
+wait_time = 0.1
+one_shot = true
+
+[node name="DeadState" type="Node" parent="UnitStateMachine"]
+script = ExtResource("7_t2qli")
+metadata/_custom_type_script = "uid://pp76qm2tpx4y"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vp4ct")
+}
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -34.0
+offset_right = 18.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_yrth6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_t2qli")
+step = 0.1
+value = 50.0
+show_percentage = false

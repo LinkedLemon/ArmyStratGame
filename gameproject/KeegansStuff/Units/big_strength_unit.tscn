@@ -1,32 +1,38 @@
 [gd_scene load_steps=6 format=3 uid="uid://duh48asuxnppu"]
 
 [ext_resource type="PackedScene" uid="uid://dewx4ifgs355p" path="res://KeegansStuff/Units/unit_base_scene.tscn" id="1_4stvi"]
-[ext_resource type="Resource" uid="uid://c4gs78suj6xg1" path="res://KeegansStuff/Units/Big_Unit.tres" id="2_2drv4"]
-[ext_resource type="Texture2D" uid="uid://evbhowfn14xr" path="res://icon.svg" id="3_xan4k"]
+[ext_resource type="Resource" uid="uid://c4gs78suj6xg1" path="res://KeegansStuff/Units/UnitStats/Big_Unit.tres" id="2_2drv4"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2drv4"]
+friction = 0.1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3qt3y"]
-size = Vector2(52, 52)
+size = Vector2(30, 28)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0d7sy"]
-size = Vector2(15, 46)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hwd1"]
+size = Vector2(15, 18)
 
-[node name="BigStrengthUnit" node_paths=PackedStringArray("attack_zone", "unit_stateMachine") instance=ExtResource("1_4stvi")]
+[node name="BigStrengthUnit" node_paths=PackedStringArray("attack_zone") instance=ExtResource("1_4stvi")]
+physics_material_override = SubResource("PhysicsMaterial_2drv4")
 unit_stats = ExtResource("2_2drv4")
 attack_zone = NodePath("Pivot/Area2D")
-unit_stateMachine = NodePath("UnitStateMachine")
 
-[node name="Sprite2D" parent="." index="0"]
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("3_xan4k")
+[node name="Shadow" parent="." index="1"]
+position = Vector2(0, 18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_3qt3y")
 
 [node name="Pivot" type="Node2D" parent="." index="3"]
 
 [node name="Area2D" type="Area2D" parent="Pivot" index="0"]
-position = Vector2(38, 0)
+position = Vector2(23, 0)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Area2D" index="0"]
-position = Vector2(-2.5, 0)
-shape = SubResource("RectangleShape2D_0d7sy")
+shape = SubResource("RectangleShape2D_2hwd1")
+
+[node name="HealthBar" parent="." index="6"]
+offset_top = -21.0
+offset_bottom = -17.0

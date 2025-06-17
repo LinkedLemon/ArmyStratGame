@@ -4,6 +4,7 @@ extends Node
 
 ## The current active state
 var current_state: State = null
+@export var start_state : State = null
 ## Dictionary of all available states
 var states: Dictionary[String,State] = {}
 
@@ -17,9 +18,9 @@ func _ready() -> void:
 			child.actor = get_parent()
 	
 	# Initialize with first state
+	await get_tree().process_frame
 	if states.size() > 0:
-		var first_state = states.values()[0]
-		change_state(first_state.name)
+		change_state(start_state.name)
 
 ## Transition to a new state
 func change_state(new_state_name: String) -> void:

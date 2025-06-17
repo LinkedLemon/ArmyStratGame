@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UnitBase" load_steps=3 format=3 uid="uid://cnw4bgo07b3mg"]
+
+[ext_resource type="AnimationLibrary" uid="uid://dsbarpvpnqfvk" path="res://KeegansStuff/Units/UnitAnimationLibary/BetterBasicUnit.res" id="1_m327r"]
+[ext_resource type="Script" uid="uid://v6h0xc5bep6d" path="res://KeegansStuff/Units/UnitResource/UnitBase.gd" id="1_sgsjm"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_sgsjm")
+attack_strength = 8
+attack_speed = 1.3
+attack_distance = 0.0
+movement_speed = 100.0
+max_movement_speed = 45.0
+health = 20.0
+defence = 1.2
+notoriety = 4
+animation_library = ExtResource("1_m327r")
+metadata/_custom_type_script = "uid://v6h0xc5bep6d"

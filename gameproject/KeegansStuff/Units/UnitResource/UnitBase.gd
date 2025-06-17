@@ -14,6 +14,6 @@ enum UnitType {PLAYER, ENEMY}
 @export var health : float = 0.0 ## Health
 @export var defence : float = 0.0 ## Defence is applied before final health calc
 @export var notoriety : int = 0 ## Skill and rank level
-@export var animation_libary : AnimationLibrary ## Unit animations and textures
+@export var animation_library : AnimationLibrary ## Unit animations and textures
 
 var type: UnitBase.UnitType = UnitBase.UnitType.PLAYER
